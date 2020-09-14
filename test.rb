@@ -20,9 +20,9 @@ def vartical(size_number, block_number, card_word, chosen_word)
     while n <= block_number - 1 do
       vartical_array << card_word[n]
       n = n + size_number
-      duplicate_array = vartical_array & chosen_word
-      duplicate_number = duplicate_array.length.to_i
     end
+    duplicate_array = vartical_array & chosen_word
+    duplicate_number = duplicate_array.length.to_i
     if duplicate_number == size_number
       return true
     end
@@ -64,7 +64,7 @@ end
 
 # ビンゴカードのサイズを入力
 size_number = gets.to_i
-unless size_number >= 3 && size_number <= 1000 && size_number.is_a?(Integer)
+if !(size_number >= 3 && size_number <= 1000 && size_number.is_a?(Integer))
   puts "3以上、1000以下の整数を半角で入力してください。"
   exit
 end
@@ -86,7 +86,7 @@ while n <= size_number
     end
   end
   
-  unless input_card.join =~ /\A[a-zA-Z0-9]+\z/
+  if !(input_card.join =~ /\A[a-zA-Z0-9]+\z/)
     puts "半角英数字で入力してください。"
     exit
   end
@@ -108,13 +108,10 @@ while n <= size_number
 end
 
 
-# 単語数を1~2000の間で入力
+# 単語数を入力
 word_number = gets.to_i
-if word_number < size_number
-  puts "マス目の数よりも大きな数を入力してください。"
-  exit
-elsif word_number < 1 || word_number > 2000
-  puts "単語数は1~2000の間で入力してください。"
+if !(word_number >= 1 && word_number <= 2000 && word_number.is_a?(Integer))
+  puts "単語数は1~2000の半角整数で入力してください。"
   exit
 end
 
@@ -128,11 +125,12 @@ while n <= word_number
     puts "単語は1~100文字で入力してください。"
     exit
   end
-  unless input_card.join =~ /\A[a-zA-Z0-9]+\z/
+  
+  if !(input_word =~ /\A[a-zA-Z0-9]+\z/)
     puts "半角英数字で入力してください。"
     exit
   end
-
+  
   chosen_word << input_word  
 
   if (chosen_word.count - chosen_word.uniq.count) >0
